@@ -1,3 +1,15 @@
+// Merge Sort
+// Merge Sort is a Divide and Conquer algorithm.
+// It divides input array in two halves,
+// calls itself for the two halves and then merges the two sorted halves.
+// The merge() function is used for merging two halves.
+// The merge(arr, l, m, r) is key process that assumes that arr[l..m] and arr[m+1..r] are sorted
+// and merges the two sorted sub-arrays into one.
+// Time Complexity for merge function: O(n)=O(n1+n2)
+// n1,n2 are sizes of two sub-arrays to be merged
+// Time Complexity: O(nlogn)
+// Space Complexity: O(n)
+// Best Case: O(nlogn) 
 #include <stdio.h>
 #include <stdlib.h>
 
