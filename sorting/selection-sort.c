@@ -16,13 +16,6 @@ void input(int *arr, int size)
         scanf("%d", &arr[i]);
 }
 
-void swap(int *a, int *b)
-{
-    int temp = *a;
-    *a = *b;
-    *b = *a;
-}
-
 void selectionSort(int *arr, int size)
 {
     int min, temp;
@@ -35,8 +28,20 @@ void selectionSort(int *arr, int size)
                 min = j;
         }
         if (min != i) // optimization
-            swap(&arr[i], &arr[min]);
+        {
+            // swap
+            temp = arr[i];
+            arr[i] = arr[min];
+            arr[min] = temp;
+        }
     }
+}
+
+void display(int *arr, int size)
+{
+    printf("The sorted array is: ");
+    for (int i = 0; i < size; i++)
+        printf("%d ", arr[i]);
 }
 
 int main(int argc, char const *argv[])
@@ -46,5 +51,8 @@ int main(int argc, char const *argv[])
     scanf("%d", &size);
     int *arr = (int *)malloc(size * sizeof(int));
     input(arr, size);
+    selectionSort(arr, size);
+    display(arr, size);
+    free(arr);
     return 0;
 }

@@ -10,47 +10,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void countingSort(int *arr, int *n, int *k)
+void countingSort(int *arr, int n, int k)
 {
-    int *count = (int *)malloc((*k) * sizeof(int));  // Create a count array to store count of individual elements and initialize count array as 0
-    int *output = (int *)malloc((*n) * sizeof(int)); // Create a output array to store sorted elements
+    int *count = (int *)malloc((k) * sizeof(int));  // Create a count array to store count of individual elements
+    int *output = (int *)malloc((n) * sizeof(int)); // Create a output array to store sorted elements
     int i;
 
     // Initialize count array with all zeros
-    for (i = 0; i < *k; i++)
+    for (i = 0; i < k; i++)
         count[i] = 0;
 
     // Store the count of each element
-    for (i = 0; i < *n; i++)
+    for (i = 0; i < n; i++)
         count[arr[i]]++;
 
     // Store the cummulative count of each array
-    for (i = 1; i < *k; i++)
+    for (i = 1; i < k; i++)
         count[i] += count[i - 1];
 
     // Find the index of each element of the original array in count array, and place the elements in output array
-    for (i = *n - 1; i >= 0; i--)
+    for (i = n - 1; i >= 0; i--)
     {
+        // start from the end of the array
+        // as we are using stable sort
         output[count[arr[i]] - 1] = arr[i];
         count[arr[i]]--;
     }
 
     // Copy the sorted elements into original array
-    for (i = 0; i < *n; i++)
+    for (i = 0; i < n; i++)
         arr[i] = output[i];
 }
 
-void printArray(int* arr, int* n)
+void printArray(int* arr, int n)
 {
     int i;
-    for (i = 0; i < *n; i++)
+    for (i = 0; i < n; i++)
         printf("%d ", arr[i]);
 }
 
-int max(int *arr, int *n)
+int max(int *arr, int n)
 {
     int max = arr[0];
-    for (int i = 1; i < *n; i++)
+    for (int i = 1; i < n; i++)
     {
         if (arr[i] > max)
             max = arr[i];
@@ -67,8 +69,10 @@ int main()
     printf("Enter the elements of the array: ");
     for (i = 0; i < size; i++)
         scanf("%d", &arr[i]);
-    k = max(arr, &size) + 1;
-    countingSort(arr, &size, &k);
+    k = max(arr, size) + 1;
+    countingSort(arr, size, k);
     printf("Sorted array: ");
-    printArray(arr, &size);
+    printArray(arr, size);
+    free(arr);
+    return 0;
 }

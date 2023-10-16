@@ -2,7 +2,7 @@
 // Sorted and Unsorted Sublists
 // Initially sorted sublist contains only one element at index 0
 // Unsorted sublist contains rest of the elements
-// We picj an element from unsorted sublist and insert it into sorted sublist
+// We pic j an element from unsorted sublist and insert it into sorted sublist
 // We repeat this process until unsorted sublist is empty
 // Space Complexity: O(1)
 // Best Case: O(n)
@@ -46,5 +46,6 @@ int main(int argc, char const *argv[])
     input(arr, size);
     insertion_sort(arr, size);
     display(arr, size);
+    free(arr);
     return 0;
 }

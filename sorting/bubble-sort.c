@@ -51,5 +51,6 @@ int main(int argc, char const *argv[])
     input(arr, size);
     bubble_sort(arr, size);
     display(arr, size);
+    free(arr);
     return 0;
 }

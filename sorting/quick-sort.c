@@ -13,7 +13,8 @@ There are many different versions of quickSort that pick pivot in different ways
 // put x at its correct position in sorted array and put all smaller elements (smaller than x) before x,
 // and put all greater elements (greater than x) after x.
 // All this should be done in linear time.
-// Time Complexity: O(n^2) in worst case and O(nlogn) in average case.
+// Time Complexity: O(n^2) in worst case
+//                  O(nlogn) in average case.
 // Space Complexity: O(1)
 
 #include <stdio.h>
@@ -23,13 +24,6 @@ void input(int *arr, int n)
 {
     for (int i = 0; i < n; i++)
         scanf("%d", &arr[i]);
-}
-
-void swap(int *a, int *b)
-{
-    int temp = *a;
-    *a = *b;
-    *b = *a;
 }
 
 void quick_sort(int *arr, int low, int high)
@@ -48,8 +42,12 @@ void quick_sort(int *arr, int low, int high)
             while (arr[j] > pivot)
                 j--;
             // swap the elements
-            if (i < j)
-                swap(&arr[i], &arr[j]);
+            if (i < j)  // if i and j are not crossed
+            {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
         }
         // swap the pivot element
         arr[low] = arr[j];
@@ -75,5 +73,6 @@ int main(int argc, char const *argv[])
 
     quick_sort(arr, 0, size - 1);
     display(arr, size);
+    free(arr);
     return 0;
 }

@@ -50,6 +50,7 @@ void merge_sort(int *arr, int low, int high)
         int mid = (low + high) / 2;
         // divide
         merge_sort(arr, low, mid);
+        // sort the second half
         merge_sort(arr, mid + 1, high);
         // conquer
         merge(arr, low, mid, high);
@@ -72,5 +73,6 @@ int main(int argc, char const *argv[])
 
     merge_sort(arr, 0, size - 1);
     display(arr, size);
+    free(arr);
     return 0;
 }
