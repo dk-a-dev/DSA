@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void main()
+int main()
 {
     int a[10];
     int i, j, n, pos, key, x, item;
@@ -57,6 +57,7 @@ void main()
     {
         printf("Item %d not found", item);
     }
+    return 0;
 }
 
 // Printing Array

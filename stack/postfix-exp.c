@@ -48,7 +48,7 @@ void display()
 
 int main()
 {
-    scanf("%[^\n]%*c",expr); // Taking input without '/n',^ is negation %*c removes /n refer sscanf through web (geeks of geeks)
+    scanf("%s",expr);
     int explen = strlen(expr);
     for (int i = 0; i < explen; i++)
     {
