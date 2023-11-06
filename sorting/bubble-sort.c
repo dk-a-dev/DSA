@@ -14,10 +14,9 @@ void input(int *arr, int size)
 
 void bubble_sort(int *arr, int size)
 {
-    int temp, flag = 0;
+    int temp = 0;
     for (int i = 0; i < size - 1; i++)
     {
-        flag = 0;
         for (int j = 0; j < size - 1 - i; j++) // to avoid unecessary comparison size-1-i
         {
             if (arr[j] > arr[j + 1])
@@ -25,12 +24,8 @@ void bubble_sort(int *arr, int size)
                 temp = arr[j];
                 arr[j] = arr[j + 1];
                 arr[j + 1] = temp;
-
-                flag = 1; // checks for isSorted
             }
         }
-        if (flag == 0)
-            break;
     }
 }
 
