@@ -20,13 +20,18 @@ int height(struct node *N)
     return N->height;
 }
 
+int getBalance(struct node *N)
+{
+    if (N == NULL)
+        return 0;
+    return height(N->left) - height(N->right);
+}
+
 struct node *newNode(int data)
 {
-    struct node *node = (struct node *)
-        malloc(sizeof(struct node));
+    struct node *node = (struct node *)malloc(sizeof(struct node));
     node->data = data;
-    node->left = NULL;
-    node->right = NULL;
+    node->left = node->right = NULL;
     node->height = 1;
     return (node);
 }
@@ -37,12 +42,8 @@ struct node *rightRotate(struct node *y)
     struct node *T2 = x->right;
     x->right = y;
     y->left = T2;
-    y->height = max(height(y->left),
-                    height(y->right)) +
-                1;
-    x->height = max(height(x->left),
-                    height(x->right)) +
-                1;
+    y->height = max(height(y->left), height(y->right)) + 1;
+    x->height = max(height(x->left), height(x->right)) + 1;
     return x;
 }
 
@@ -52,21 +53,9 @@ struct node *leftRotate(struct node *x)
     struct node *T2 = y->left;
     y->left = x;
     x->right = T2;
-    x->height = max(height(x->left),
-                    height(x->right)) +
-                1;
-    y->height = max(height(y->left),
-                    height(y->right)) +
-                1;
+    x->height = max(height(x->left), height(x->right)) + 1;
+    y->height = max(height(y->left), height(y->right)) + 1;
     return y;
-}
-
-int getBalance(struct node *N)
-{
-    if (N == NULL)
-        return 0;
-    return height(N->left) -
-           height(N->right);
 }
 
 struct node *insert(struct node *node, int data)
@@ -104,7 +93,7 @@ struct node *insert(struct node *node, int data)
         node->right = rightRotate(node->right);
         return leftRotate(node);
     }
-    
+
     return node;
 }
 

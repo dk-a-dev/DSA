@@ -69,9 +69,9 @@ struct node *deleteBST(struct node *root, int data)
         }
         else
         {
-            struct node *temp = findMin(root->right);
-            root->data = temp->data;
-            root->right = deleteBST(root->right, temp->data);
+            struct node *insucc = findMin(root->right);
+            root->data = insucc->data;
+            root->right = deleteBST(root->right, insucc->data);
         }
     }
     return root;

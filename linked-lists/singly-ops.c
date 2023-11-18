@@ -44,7 +44,7 @@ void creator()
     }
 }
 
-void delete()
+void deletele()
 {
     int pos, i;
     struct node *temp, *prev;
@@ -229,7 +229,7 @@ int main(int argc, char const *argv[])
             search();
             break;
         case 7:
-            delete ();
+            deletele ();
             break;
         case 8:
             exit(0);

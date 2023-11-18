@@ -19,21 +19,169 @@ struct node *head = NULL; // pointer to head node(address of head node)
 
 void creator()
 {
-    struct node *newnode, *temp;
+    int n, i;
+    struct node *temp, *newnode;
+    printf("Enter the number of nodes: ");
+    scanf("%d", &n);
+    for (i = 0; i < n; i++)
+    {
+        newnode = (struct node *)malloc(sizeof(struct node));
+        printf("Enter the data for node %d: ", i + 1);
+        scanf("%d", &newnode->data);
+        newnode->next = NULL;
+        newnode->prev = NULL;
+        if (head == NULL)
+        {
+            head = temp = newnode;
+        }
+        else
+        {
+            temp->next = newnode;
+            newnode->prev = temp;
+            temp = newnode;
+        }
+    }
+}
+
+void deletele ()
+{
+    struct node *temp;
+    int pos, i = 1;
+    printf("Enter the position to delete the node: ");
+    scanf("%d", &pos);
+    if (head == NULL)
+    {
+        printf("List is empty!\n");
+    }
+    else
+    {
+        temp = head;
+        while (i < pos)
+        {
+            temp = temp->next;
+            i++;
+        }
+        temp->prev->next = temp->next;
+        temp->next->prev = temp->prev;
+        free(temp);
+    }
+}
+
+void insert_begin()
+{
+    struct node *newnode;
     newnode = (struct node *)malloc(sizeof(struct node));
     printf("Enter the data for node:");
-    scanf("%d", &newnode->data); // or *(newnode).data
+    scanf("%d", &newnode->data);
     newnode->next = NULL;
     newnode->prev = NULL;
     if (head == NULL)
     {
-        head = temp = newnode;
+        head = newnode;
     }
     else
     {
+        newnode->next = head;
+        head->prev = newnode->next;
+        head = newnode;
+    }
+}
+
+void insert_end()
+{
+    struct node *newnode, *temp;
+    newnode = (struct node *)malloc(sizeof(struct node));
+    printf("Enter the data for node:");
+    scanf("%d", &newnode->data);
+    newnode->next = NULL;
+    newnode->prev = NULL;
+    if (head == NULL)
+    {
+        head = newnode;
+    }
+    else
+    {
+        temp = head;
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+        }
         temp->next = newnode;
         newnode->prev = temp;
-        temp = newnode;
+    }
+}
+
+void insert_pos()
+{
+    struct node *newnode, *temp;
+    int pos, i = 1;
+    newnode = (struct node *)malloc(sizeof(struct node));
+    printf("Enter the data for node:");
+    scanf("%d", &newnode->data);
+    newnode->next = NULL;
+    newnode->prev = NULL;
+    printf("Enter the position to insert the node: ");
+    scanf("%d", &pos);
+    if (head == NULL)
+    {
+        head = newnode;
+    }
+    else
+    {
+        temp = head;
+        while (i < pos - 1)
+        {
+            temp = temp->next;
+            i++;
+        }
+        newnode->next = temp->next;
+        newnode->prev = temp;
+        temp->next->prev = newnode->next;
+        temp->next = newnode;
+    }
+}
+
+
+
+void display()
+{
+    struct node *temp;
+    if (head == NULL)
+    {
+        printf("List is empty!\n");
+    }
+    else
+    {
+        temp = head;
+        while (temp != NULL)
+        {
+            printf("%d\t", temp->data);
+            temp = temp->next;
+        }
+    }
+}
+
+void reverse()
+{
+    struct node *temp, *prevnode;
+    if (head == NULL)
+    {
+        printf("List is empty!\n");
+    }
+    else
+    {
+        temp = head;
+        while (temp != NULL)
+        {
+            prevnode = temp->prev;
+            temp->prev = temp->next;
+            temp->next = prevnode;
+            temp = temp->prev;
+        }
+        if (prevnode != NULL)
+        {
+            head = prevnode->prev;
+        }
     }
 }
 
@@ -67,7 +215,7 @@ int main(int argc, char const *argv[])
             insert_pos();
             break;
         case 5:
-            delete ();
+            deletele ();
             break;
         case 6:
             display();

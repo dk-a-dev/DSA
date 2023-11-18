@@ -4,8 +4,8 @@
 // Burst time(bt):task complete its execution
 // Completion time (ct):task execution complete
 // Turn-Around time (tat):total time taken by task
-// wt=tat-bt
 // tat=ct-at
+// wt=tat-bt
 
 #include <stdio.h>
 int num_tasks;
@@ -57,9 +57,9 @@ void task_manager(int ind)
     at = srttemp_at[ind];
     bt = srttemp_bt[ind];
     if (at > ct)
-        ct += wt + at + bt;
+        ct += at + bt;
     else
-        ct += wt + bt;
+        ct += bt;
     tat = ct - at;
     wt = tat - bt;
     arr_tat[ind] = tat;
@@ -82,7 +82,7 @@ void display_sorted()
             }
         }
     }
-    printf("\n",NULL);
+    printf("\n", NULL);
 }
 
 void task_display()
@@ -102,15 +102,16 @@ void task_display()
 
 void avg_time()
 {
-    float avg_tat=0.0;
-    float avg_wt=0.0;
-    for(int k=0;k<num_tasks;k++){
-        avg_tat+=arr_tat[k];
-        avg_wt+=arr_at[k];
+    float avg_tat = 0.0;
+    float avg_wt = 0.0;
+    for (int k = 0; k < num_tasks; k++)
+    {
+        avg_tat += arr_tat[k];
+        avg_wt += arr_at[k];
     }
-    avg_tat=avg_tat/num_tasks;
-    avg_wt=avg_wt/num_tasks;
-    printf("%.1f %.0f",avg_tat,avg_wt);
+    avg_tat = avg_tat / num_tasks;
+    avg_wt = avg_wt / num_tasks;
+    printf("%.1f %.0f", avg_tat, avg_wt);
 }
 
 int main(int argc, char const *argv[])

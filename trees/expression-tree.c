@@ -3,38 +3,44 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct node {
+typedef struct node
+{
     char data;
     struct node *left;
     struct node *right;
 } node;
 
-typedef struct stack {
+typedef struct stack
+{
     node *data;
     struct stack *next;
 } stack;
 
-node *createNode(char data) {
+node *createNode(char data)
+{
     node *newNode = (node *)malloc(sizeof(node));
     newNode->data = data;
-    newNode->left = NULL;
-    newNode->right = NULL;
+    newNode->left = newNode->right = NULL;
     return newNode;
 }
 
-int isEmpty(stack *top) {
+int isEmpty(stack *top)
+{
     return top == NULL;
 }
 
-void push(stack **top, node *data) {
+void push(stack **top, node *data)
+{
     stack *newNode = (stack *)malloc(sizeof(stack));
     newNode->data = data;
     newNode->next = *top;
     *top = newNode;
 }
 
-node *pop(stack **top) {
-    if (isEmpty(*top)) {
+node *pop(stack **top)
+{
+    if (isEmpty(*top))
+    {
         printf("Stack underflow\n");
         return NULL;
     }
@@ -45,23 +51,29 @@ node *pop(stack **top) {
     return data;
 }
 
-void printTree(node *root) {
-    if (root == NULL) {
-        return;
+void printTree(node *root)
+{
+    if (root != NULL)
+    {
+        printTree(root->left);
+        printf("%c ", root->data);
+        printTree(root->right);
     }
-    printTree(root->left);
-    printf("%c", root->data);
-    printTree(root->right);
 }
 
-node *createExpressionTree(char *postfix) {
+node *createExpressionTree(char *postfix)
+{
     stack *s = NULL;
     node *t, *t1, *t2;
-    for (int i = 0; postfix[i] != '\0'; i++) {
-        if (postfix[i] >= '0' && postfix[i] <= '9') {
+    for (int i = 0; postfix[i] != '\0'; i++)
+    {
+        if (postfix[i] >= '0' && postfix[i] <= '9')
+        {
             t = createNode(postfix[i]);
             push(&s, t);
-        } else {
+        }
+        else
+        {
             t = createNode(postfix[i]);
             t1 = pop(&s);
             t2 = pop(&s);
@@ -73,7 +85,8 @@ node *createExpressionTree(char *postfix) {
     return pop(&s);
 }
 
-int main() {
+int main()
+{
     char postfix[] = "23*42/+6-";
     node *root = createExpressionTree(postfix);
     printTree(root);
