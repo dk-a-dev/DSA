@@ -1,29 +1,3 @@
-// Kruskals Algorithm
-// Find minimal spanning of the following graph by applying Kruskal’s algorithm
-
-// Weight matrix of the graph(6x6)=
-/*
-0 2 0 1 4 0
-2 0 3 3 0 7
-0 3 0 5 0 8
-1 3 5 0 9 0
-4 0 0 9 0 0
-0 7 8 0 0 0
-*/
-
-// Give output in following order and format
-/*
-Edge:Weight
-1-4:1
-2-1:2
-3-2:3
-5-1:4
-6-2:7
-*/
-
-// Kruskals Algorithm
-// Write algo properly
-
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX 100
@@ -34,20 +8,6 @@ int adj[MAX][MAX];
 int status[MAX];
 int parent[MAX];
 int weight[MAX][MAX];
-
-void input_graph();
-void kruskal();
-void make_tree(int, int);
-int find(int);
-void union_ij(int, int);
-
-int main()
-{
-    input_graph();
-    printf("Edge:Weight\n");
-    kruskal();
-    return 0;
-}
 
 void input_graph()
 {
@@ -60,6 +20,21 @@ void input_graph()
             scanf("%d", &adj[i][j]);
         }
     }
+}
+
+int find(int i)
+{
+    while (parent[i])
+        i = parent[i];
+    return i;
+}
+
+void union_ij(int i, int j)
+{
+    if (i < j)
+        parent[i] = j;
+    else
+        parent[j] = i;
 }
 
 void kruskal()
@@ -104,6 +79,9 @@ void kruskal()
         if (u != v)
         {
             ne = ne + 1;
+            if (ne == 1)
+                printf("%d-%d:%d\n", a, b, min);
+            else
             printf("%d-%d:%d\n", b, a, min);
             mincost = mincost + min;
             union_ij(u, v);
@@ -112,28 +90,10 @@ void kruskal()
     }
 }
 
-void make_tree(int i, int j)
+int main()
 {
-    adj[i][j] = adj[j][i] = 1;
-}
-
-int find(int i)
-{
-    while (parent[i])
-    {
-        i = parent[i];
-    }
-    return i;
-}
-
-void union_ij(int i, int j)
-{
-    if (i < j)
-    {
-        parent[i] = j;
-    }
-    else
-    {
-        parent[j] = i;
-    }
+    input_graph();
+    printf("Edge:Weight\n");
+    kruskal();
+    return 0;
 }
