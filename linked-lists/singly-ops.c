@@ -90,9 +90,10 @@ void insert_at_end()
         temp->next = newnode;
     }
 }
+
 void insert_at_beginning()
 {
-    struct node *newnode, *temp;
+    struct node *newnode;
     newnode = (struct node *)malloc(sizeof(struct node));
     printf("Enter the data for the new node: ");
     scanf("%d", &newnode->data);
@@ -160,15 +161,15 @@ void search()
 
 void reverse()
 {
-    struct node *prev, *curr, *nextnode;
+    struct node *prev, *curr, *temp;
     prev = NULL;
-    curr = nextnode = head;
-    while (nextnode != NULL)
+    curr = temp = head;
+    while (temp != NULL)
     {
-        nextnode = nextnode->next;
+        temp = temp->next;
         curr->next = prev;
         prev = curr;
-        curr = nextnode;
+        curr = temp;
     }
     head = prev;
 }
