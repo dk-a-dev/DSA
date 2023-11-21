@@ -67,14 +67,13 @@ node *createExpressionTree(char *postfix)
     node *t, *t1, *t2;
     for (int i = 0; postfix[i] != '\0'; i++)
     {
+        t = createNode(postfix[i]);
         if (postfix[i] >= '0' && postfix[i] <= '9')
         {
-            t = createNode(postfix[i]);
             push(&s, t);
         }
         else
         {
-            t = createNode(postfix[i]);
             t1 = pop(&s);
             t2 = pop(&s);
             t->right = t1;
