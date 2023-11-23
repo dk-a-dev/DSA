@@ -12,13 +12,9 @@
 
 void countingSort(int *arr, int n, int k)
 {
-    int *count = (int *)malloc((k) * sizeof(int));  // Create a count array to store count of individual elements
+    int *count = (int *)calloc((k), sizeof(int));   // Create a count array to store count of individual elements
     int *output = (int *)malloc((n) * sizeof(int)); // Create a output array to store sorted elements
     int i;
-
-    // Initialize count array with all zeros
-    for (i = 0; i < k; i++)
-        count[i] = 0;
 
     // Store the count of each element
     for (i = 0; i < n; i++)
@@ -42,7 +38,7 @@ void countingSort(int *arr, int n, int k)
         arr[i] = output[i];
 }
 
-void printArray(int* arr, int n)
+void printArray(int *arr, int n)
 {
     int i;
     for (i = 0; i < n; i++)

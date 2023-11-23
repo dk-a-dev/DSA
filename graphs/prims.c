@@ -26,16 +26,16 @@ Edge:Weight
 7-8:3
 */
 
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 #define MAX 100
 #define TEMP 0
 #define PERM 1
 #define infinity 9999
 #define NIL -1
 
-int n;    //no of vertices
-int adj[MAX][MAX];    //weight matrix
+int n;             // no of vertices
+int adj[MAX][MAX]; // weight matrix
 int predecessor[MAX];
 int pathLength[MAX];
 int status[MAX];
@@ -43,14 +43,14 @@ int status[MAX];
 int min_temp()
 {
     int i;
-    int min=infinity;
-    int k=NIL;
-    for(i=0;i<n;i++)
+    int min = infinity;
+    int k = NIL;
+    for (i = 0; i < n; i++)
     {
-        if(status[i]==TEMP && pathLength[i]<min)
+        if (status[i] == TEMP && pathLength[i] < min)
         {
-            min=pathLength[i];
-            k=i;
+            min = pathLength[i];
+            k = i;
         }
     }
     return k;
@@ -58,52 +58,51 @@ int min_temp()
 
 void prim()
 {
-    int i,current;
-    for(i=0;i<n;i++)
+    int i, current;
+    for (i = 0; i < n; i++)
     {
-        predecessor[i]=NIL;
-        pathLength[i]=infinity;
-        status[i]=TEMP;
+        predecessor[i] = NIL;
+        pathLength[i] = infinity;
+        status[i] = TEMP;
     }
-    pathLength[0]=0;
-    while(1)
+    pathLength[0] = 0;
+    while (1)
     {
-        current=min_temp();
-        if(current==NIL)
+        current = min_temp();
+        if (current == NIL)
             return;
-        status[current]=PERM;
-        for(i=0;i<n;i++)
+        status[current] = PERM;
+        for (i = 0; i < n; i++)
         {
-            if(adj[current][i]!=0 && status[i]==TEMP)
+            if (adj[current][i] != 0 && status[i] == TEMP)
             {
-                if(adj[current][i]<pathLength[i])
+                if (adj[current][i] < pathLength[i])
                 {
-                    predecessor[i]=current;
-                    pathLength[i]=adj[current][i];
+                    predecessor[i] = current;
+                    pathLength[i] = adj[current][i];
                 }
             }
         }
     }
 }
 
-
 int main()
 {
-    int i,j,total_cost=0;
-    scanf("%d",&n);
-    for(i=0;i<n;i++)
+    int total_cost = 0;
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++)
     {
-        for(j=0;j<n;j++)
+        for (int j = 0; j < n; j++)
         {
-            scanf("%d",&adj[i][j]);
+            scanf("%d", &adj[i][j]);
         }
     }
     prim();
     printf("Edge:Weight\n");
-    for(i=1;i<n;i++)
+    for (int i = 1; i < n; i++)
     {
-        printf("%d-%d:%d\n",predecessor[i],i,adj[predecessor[i]][i]);
-        total_cost+=adj[predecessor[i]][i];
+        printf("%d-%d:%d\n", predecessor[i], i, adj[predecessor[i]][i]);
+        total_cost += adj[predecessor[i]][i];
     }
     return 0;
 }

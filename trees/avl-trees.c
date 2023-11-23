@@ -33,7 +33,7 @@ struct node *newNode(int data)
     node->data = data;
     node->left = node->right = NULL;
     node->height = 1;
-    return (node);
+    return node;
 }
 
 struct node *rightRotate(struct node *y)

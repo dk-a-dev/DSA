@@ -9,7 +9,7 @@
 // n1,n2 are sizes of two sub-arrays to be merged
 // Time Complexity: O(nlogn)
 // Space Complexity: O(n)
-// Best Case: O(nlogn) 
+// Best Case: O(nlogn)
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -23,7 +23,7 @@ void merge(int *arr, int low, int mid, int high)
 {
     // merge the two sorted arrays
     int i = low, j = mid + 1, k = low;
-    int* temp=(int*)malloc((high+1)*sizeof(int));
+    int *temp = (int *)malloc((high + 1) * sizeof(int));
     // copy the elements to the temporary array
     while (i <= mid && j <= high)
     {
@@ -56,7 +56,6 @@ void merge_sort(int *arr, int low, int high)
         merge(arr, low, mid, high);
     }
 }
-
 
 void display(int *arr, int n)
 {

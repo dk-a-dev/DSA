@@ -24,17 +24,13 @@ void display(int *arr, int n)
 
 void counting_sort(int *arr, int n, int pos)
 {
-    int *count = (int *)malloc((10) * sizeof(int));  // Create a count array to store count of individual elements
+    int *count = (int *)calloc((10), sizeof(int));  // Create a count array to store count of individual elements
     int *output = (int *)malloc((n) * sizeof(int)); // Create a output array to store sorted elements
     int i;
 
-    // Initialize count array with all zeros
-    for (i = 0; i < 10; i++)
-        count[i] = 0;
-
     // Store the count of each element
     for (i = 0; i < n; i++)
-        count[(arr[i]/pos)%10]++;
+        count[(arr[i] / pos) % 10]++;
 
     // Store the cummulative count of each array
     for (i = 1; i < 10; i++)
@@ -43,20 +39,21 @@ void counting_sort(int *arr, int n, int pos)
     // Find the index of each element of the original array in count array, and place the elements in output array
     for (i = n - 1; i >= 0; i--)
     {
-        output[count[(arr[i]/pos)%10] - 1] = arr[i];
-        count[(arr[i]/pos)%10]--;
+        output[count[(arr[i] / pos) % 10] - 1] = arr[i];
+        count[(arr[i] / pos) % 10]--;
     }
     // Copy the sorted elements into original array
     for (i = 0; i < n; i++)
         arr[i] = output[i];
 }
 
-void radix_sort(int* arr, int size, int max)
+void radix_sort(int *arr, int size, int max)
 {
     // make use of counting_sort() to sort the array
-    for(int pos = 1; max/pos > 0; pos *= 10){
+    for (int pos = 1; max / pos > 0; pos *= 10)
+    {
         counting_sort(arr, size, pos);
-    }      
+    }
 }
 
 int max(int *arr, int n)
@@ -70,7 +67,7 @@ int max(int *arr, int n)
 
 int main(int argc, char const *argv[])
 {
-    int size,k;
+    int size, k;
     printf("Enter the size of the array: ");
     scanf("%d", &size);
     int *arr = (int *)malloc(size * sizeof(int));
