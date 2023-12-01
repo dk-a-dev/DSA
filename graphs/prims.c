@@ -53,7 +53,7 @@ int min_temp()
             k = i;
         }
     }
-    printf("\n",NULL);
+    printf("\n", NULL);
     printf("\ncurrent: %d\n", k);
     return k;
 }
@@ -89,25 +89,17 @@ void prim()
         status[current] = PERM;
         if (flag == 1)
         {
-            printf("predecessor[]: ",NULL);
+            printf("predecessor[]: ", NULL);
             for (int i = 0; i < n; i++)
-            {
                 printf("%d ", predecessor[i]);
-            }
-            printf("\n",NULL);
-
-            printf("pathLength[]: ",NULL);
+            printf("\n", NULL);
+            printf("pathLength[]: ", NULL);
             for (int i = 0; i < n; i++)
-            {
                 printf("%d ", pathLength[i]);
-            }
-            printf("\n",NULL);
-
-            printf("status[]: ",NULL);
+            printf("\n", NULL);
+            printf("status[]: ", NULL);
             for (int i = 0; i < n; i++)
-            {
                 printf("%d ", status[i]);
-            }
         }
     }
 }
@@ -124,7 +116,7 @@ int main()
         }
     }
     prim();
-    printf("Edge:Weight\n",NULL);
+    printf("Edge:Weight\n", NULL);
     for (int i = 1; i < n; i++)
     {
         printf("%d-%d:%d\n", predecessor[i], i, adj[predecessor[i]][i]);

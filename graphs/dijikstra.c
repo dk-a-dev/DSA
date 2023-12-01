@@ -29,7 +29,7 @@ int minDistance(int dist[], int sptSet[], int size)
         }
     }
     printf("\n\nMin Value From Vertex:%d\n", min);
-    printf("Vertex Number:%d\n", min_index+1);
+    printf("Vertex Number:%d\n", min_index + 1);
     return min_index;
 }
 
@@ -68,14 +68,10 @@ void dijkstra(int **graph, int src, int size)
         if (flag == 1)
         {
             for (int i = 0; i < size; i++)
-            {
                 printf("%d ", dist[i]);
-            }
             printf("\n");
             for (int i = 0; i < size; i++)
-            {
                 printf("%d ", sptSet[i]);
-            }
         }
     }
     printSolution(dist, size);
