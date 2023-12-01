@@ -2,6 +2,7 @@
 
 #define max 100
 char stack[max];
+char infix[max], postfix[max];
 int top = -1;
 
 void push(char e)
@@ -43,9 +44,15 @@ int precedence(char e)
     }
 }
 
+void display()
+{
+    for (int k = 0; postfix[k] != '\0'; k++)
+        printf("%c ", postfix[k]);
+    printf("\n");
+}
+
 int main()
 {
-    char infix[max], postfix[max];
     int i = 0, j = 0;
 
     scanf("%s", infix);
@@ -86,12 +93,6 @@ int main()
     {
         postfix[j++] = pop();
     }
-    postfix[j] = '\0';
-
-    for (int k = 0; postfix[k] != '\0'; k++)
-    {
-        printf("%c ", postfix[k]);
-    }
-
+    display();
     return 0;
 }
