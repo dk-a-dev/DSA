@@ -4,7 +4,7 @@
 
 int n;
 int adj[MAX][MAX];
-int parent[MAX];
+int parent[MAX]={0};
 int weight[MAX][MAX];
 
 void input_graph()
@@ -33,6 +33,12 @@ void union_ij(int i, int j)
         parent[i] = j;
     else
         parent[j] = i;
+    printf("%d %d\n",i,j);
+    for(int k=1;k<=n;k++)
+    {
+        printf("%d ",parent[k]);
+    }
+    printf("\n");
 }
 
 void kruskal()
@@ -44,22 +50,16 @@ void kruskal()
         for (j = 1; j <= n; j++)
         {
             if (adj[i][j] == 0)
-            {
                 weight[i][j] = 999;
-            }
             else
-            {
                 weight[i][j] = adj[i][j];
-            }
         }
     }
-    for (i = 1; i <= n; i++)
-    {
-        parent[i] = 0;
-    }
+   
     while (ne < n - 1)
     {
         min = 999;
+        // Find minimum weight edge
         for (i = 1; i <= n; i++)
         {
             for (j = 1; j <= n; j++)
@@ -72,20 +72,24 @@ void kruskal()
                 }
             }
         }
-        u = find(u);
-        v = find(v);
+        // Check if the selected edge is creating a cycle or not
+        u = find(u); // Find parent of u
+        v = find(v); // Find parent of v
         if (u != v)
         {
             ne = ne + 1;
             if (ne == 1)
                 printf("%d-%d:%d\n", a, b, min);
             else
-            printf("%d-%d:%d\n", b, a, min);
+                printf("%d-%d:%d\n", b, a, min);
             mincost = mincost + min;
+            // Combine the trees
             union_ij(u, v);
         }
+        // Remove edge from graph
         weight[a][b] = weight[b][a] = 999;
     }
+    printf("Minimal Spanning Tree cost: %d\n", mincost);
 }
 
 int main()
