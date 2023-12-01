@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX 100
-#define TEMP 0
 
 int n;
 int adj[MAX][MAX];
-int status[MAX];
 int parent[MAX];
 int weight[MAX][MAX];
 
