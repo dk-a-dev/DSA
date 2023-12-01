@@ -53,6 +53,8 @@ int min_temp()
             k = i;
         }
     }
+    printf("\n",NULL);
+    printf("\ncurrent: %d\n", k);
     return k;
 }
 
@@ -69,9 +71,9 @@ void prim()
     while (1)
     {
         current = min_temp();
+        int flag = 0;
         if (current == NIL)
             return;
-        status[current] = PERM;
         for (i = 0; i < n; i++)
         {
             if (adj[current][i] != 0 && status[i] == TEMP)
@@ -81,6 +83,30 @@ void prim()
                     predecessor[i] = current;
                     pathLength[i] = adj[current][i];
                 }
+                flag = 1;
+            }
+        }
+        status[current] = PERM;
+        if (flag == 1)
+        {
+            printf("predecessor[]: ",NULL);
+            for (int i = 0; i < n; i++)
+            {
+                printf("%d ", predecessor[i]);
+            }
+            printf("\n",NULL);
+
+            printf("pathLength[]: ",NULL);
+            for (int i = 0; i < n; i++)
+            {
+                printf("%d ", pathLength[i]);
+            }
+            printf("\n",NULL);
+
+            printf("status[]: ",NULL);
+            for (int i = 0; i < n; i++)
+            {
+                printf("%d ", status[i]);
             }
         }
     }
@@ -98,11 +124,12 @@ int main()
         }
     }
     prim();
-    printf("Edge:Weight\n");
+    printf("Edge:Weight\n",NULL);
     for (int i = 1; i < n; i++)
     {
         printf("%d-%d:%d\n", predecessor[i], i, adj[predecessor[i]][i]);
         total_cost += adj[predecessor[i]][i];
     }
+    printf("Minimal Spanning Tree cost: %d\n", total_cost);
     return 0;
 }
